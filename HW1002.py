@@ -19,10 +19,11 @@ def validate_year(year):
         return False
 
 def create_test_file(name, year, month):
-    with open("testFile.txt", "w") as f:
+    with open("testFile.txt", "w", encoding="utf-8") as f:
         f.write(f"Прізвище: {name}\n")
         f.write(f"Рік народження: {year}\n")
         f.write(f"Місяць народження: {month}\n")
+    print('Дані записанно')
 
 
 def get_user_input():
