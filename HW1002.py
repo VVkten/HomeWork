@@ -1,7 +1,7 @@
 def validate_month(month):
     try:
         month = int(month)
-        if month >= 1 or month <= 12:
+        if month >= 1 and month <= 12:
             return True
         else:
             return False
