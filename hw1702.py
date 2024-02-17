@@ -1,5 +1,17 @@
 from tkinter import *
 
+def change_label():
+    global click
+    click += 1
+    if click % 2 == 1:
+        label["text"] = "Новий напис"
+        label["fg"] = "blue"
+    else:
+        label["text"] = labelT
+        label["fg"] = "pink"
+
+    clickLabel["text"] = f"Кількість клацань: {click}"
+
 
 if __name__ == "__main__":
     click = 0
@@ -20,9 +32,8 @@ if __name__ == "__main__":
                        bg='pink',
                        font=(None, 30),
                        fg='cyan',
-                       padx=20, pady=10
-                       # command=change_label
-                       )
+                       padx=20, pady=10,
+                       command = change_label)
     btnChange.pack()
 
     clickLabel = Label(root,
