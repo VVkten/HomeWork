@@ -14,4 +14,14 @@ if __name__ == "__main__":
     label = Label(root, text=labelT)
     label.pack(pady=20)
 
+    btnChange = Button(root,
+                       text="Натисни",
+                       bg='pink',
+                       font=(None, 30),
+                       fg='cyan',
+                       padx=20, pady=10
+                       # command=change_label
+                       )
+    btnChange.pack()
+
     root.mainloop()
