@@ -11,7 +11,8 @@ if __name__ == "__main__":
     root.resizable(width=False, height=False)
     root.geometry(f'300x300+{int(w / 2 - 150)}+{int(h / 2 - 150)}')
 
-    label = Label(root, text=labelT)
+    label = Label(root, text=labelT,
+                        fg='magenta')
     label.pack(pady=20)
 
     btnChange = Button(root,
@@ -23,5 +24,10 @@ if __name__ == "__main__":
                        # command=change_label
                        )
     btnChange.pack()
+
+    clickLabel = Label(root,
+                        text=f"Кількість клацань: {click}",
+                        fg='magenta')
+    clickLabel.pack(pady=10)
 
     root.mainloop()
