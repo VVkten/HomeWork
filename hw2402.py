@@ -3,31 +3,58 @@ from tkinter import *
 from tkinter import messagebox
 
 root = Tk()
-root.geometry('400x250')
+w = root.winfo_screenwidth()
+h = root.winfo_screenheight()
+root.geometry(f'400x400+{int(w/2-200)}+{int(h/2-200)}')
 root.title('Вгадай число')
 
 min_value = StringVar()
 max_value = StringVar()
 
-attempts_remaining = 5
-current_attempt = 0
+maxSpr = 5
+spr = 0
 numb = None
 
 def generate_number():
     # global generated_number, attempts_remaining
+    global numb
     try:
-        min_val = int(labelMin.get())
-        max_val = int(labelMax.get())
-        if min_val >= max_val:
+        min = int(entryMin.get())
+        max = int(entryMax.get())
+        if min >= max:
             messagebox.showwarning('Зауваження', 'Перше число має бути меншим за друге!')
         else:
-            numb = random.randint(min_val, max_val)
-            labelMin.config(state='disabled')
-            labelMax.config(state='disabled')
+            numb = random.randint(min, max)
+            print(f'Загадане число: {numb}')
+            entryMax.config(state='disabled')
+            entryMin.config(state='disabled')
             btn1.config(state='disabled')
+            check_guess()
     except ValueError:
         messagebox.showerror('Помилка', 'Потрібно вводити цілі числа')
 
+def check_guess():
+    global numb
+    global spr
+    if spr < maxSpr:
+        try:
+            numberQ = int(entryWin.get())
+            spr += 1
+            if numberQ == numb:
+                messagebox.showinfo('Результат', f'Ви вгадали число {numb}!')
+            elif numberQ > numb:
+                messagebox.showinfo('Результат', 'Загадане число менше!')
+            else:
+                messagebox.showinfo('Результат', 'Загадане число більше!')
+        except:
+            print('Не знаю чому Т-Т')
+            # messagebox.showerror('Помилка', 'Потрібно вводити цілі числа')
+    else:
+        messagebox.showinfo('Кінець гри', f'Ви не вгадали число. Загадане число було: {numb}')
+
+    labelSoW.place(x=10, y=150)
+    entryWin.place(x=130, y=150)
+    btn2.place(x=150, y=180)
 
 
 labelMin = Label(root, text='Мінімальне число:')
@@ -40,12 +67,10 @@ labelMax.place(x=10, y=80)
 entryMax = Entry(root, textvariable=max_value)
 entryMax.place(x=135, y=80)
 
-btn1 = Button(root, text='Генерувати')
+btn1 = Button(root, text='Генерувати', command=generate_number)
 btn1.place(x=150, y=120)
 
-btn2 = Button(root, text='Вгадати',
-                      # command=check_guess
-                      )
+btn2 = Button(root, text='Вгадати', command=check_guess)
 btn2.place_forget()
 
 entryWin = Entry(root)
