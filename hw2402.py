@@ -16,19 +16,18 @@ spr = 0
 numb = None
 
 def generate_number():
-    # global generated_number, attempts_remaining
     global numb
     try:
-        min = int(entryMin.get())
-        max = int(entryMax.get())
-        if min >= max:
+        min_val = int(entryMin.get())
+        max_val = int(entryMax.get())
+        if min_val >= max_val:
             messagebox.showwarning('Зауваження', 'Перше число має бути меншим за друге!')
         else:
-            numb = random.randint(min, max)
+            numb = random.randint(min_val, max_val)
             print(f'Загадане число: {numb}')
-            entryMax.config(state='disabled')
-            entryMin.config(state='disabled')
-            btn1.config(state='disabled')
+            entryMax['state'] ='disabled'
+            entryMin['state'] ='disabled'
+            btn1['state'] ='disabled'
             check_guess()
     except ValueError:
         messagebox.showerror('Помилка', 'Потрібно вводити цілі числа')
@@ -52,9 +51,23 @@ def check_guess():
     else:
         messagebox.showinfo('Кінець гри', f'Ви не вгадали число. Загадане число було: {numb}')
 
+    reset_game()  # Додайте виклик функції reset_game() тут
     labelSoW.place(x=10, y=150)
     entryWin.place(x=130, y=150)
     btn2.place(x=150, y=180)
+
+def reset_game():
+    global numb, spr
+    spr = 0
+    numb = None
+
+    entryMin.config(state='normal')
+    entryMax.config(state='normal')
+    btn1.config(state='normal')
+
+    labelSoW.place_forget()
+    entryWin.place_forget()
+    btn2.place_forget()
 
 
 labelMin = Label(root, text='Мінімальне число:')
