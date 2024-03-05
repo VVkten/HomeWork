@@ -1,6 +1,5 @@
 from tkinter import *
-from tkinter import messagebox
-
+import math
 # Створення головного вікна
 root = Tk()
 root.title("Калькулятор")
@@ -14,14 +13,20 @@ buttons = [
     '7', '8', '9', '/',
     '4', '5', '6', '*',
     '1', '2', '3', '-',
-    '0', '.', '=', '+'
+    '0', '.', '=', '+',
+    'C', 'sin', 'Вихід'
 ]
 
 row = 1
 col = 0
-
 for button in buttons:
     if button == '=':
+        Button(root, text=button, padx=30, pady=20).grid(row=row, column=col)
+    elif button == 'C':
+        Button(root, text=button, padx=30, pady=20).grid(row=row, column=col)
+    elif button == 'sin':
+        Button(root, text=button, padx=30, pady=20).grid(row=row, column=col)
+    elif button == 'Вихід':
         Button(root, text=button, padx=30, pady=20).grid(row=row, column=col)
     else:
         Button(root, text=button, padx=30, pady=20).grid(row=row, column=col)
